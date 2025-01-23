@@ -5,7 +5,8 @@ const transformStateWithClones = require('./transformStateWithClones');
 test('Should create a new object with a single added property', () => {
   const state = {};
 
-  expect(transformStateWithClones(state, [
+  expect(
+    transformStateWithClones(state, [
     {
       type: 'addProperties', extraData: { name: 'Jim' },
     },
@@ -108,20 +109,19 @@ test('Should create an object without removed properties', () => {
     foo: 'bar', bar: 'foo', name: 'Jim', hello: 'world',
   };
 
-  expect(transformStateWithClones(state, [
+  expect(
+    transformStateWithClones(state, [
     {
       type: 'removeProperties', keysToRemove: ['hello', 'foo', 'name'],
-    },
+      },
   ]))
-    .toEqual([
-      { bar: 'foo' },
-    ]);
+    .toEqual([{ bar: 'foo' }]);
 
   expect(state)
     .toEqual({
       foo: 'bar', bar: 'foo', name: 'Jim', hello: 'world',
     });
-});
+
 
 test('Should create the same state when removing no properties', () => {
   const state = {
